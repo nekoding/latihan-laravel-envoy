@@ -24,3 +24,8 @@ Route::get('/hello', function () {
 Route::get('/john', function () {
     return 'Hello John, how are you ?';
 });
+
+
+Route::get('author', function () {
+    return 'Nekoding';
+});
