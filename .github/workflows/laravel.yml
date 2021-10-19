@@ -33,3 +33,20 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+      
+  laravel-deployment:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: Setup SSH
+      uses: kielabokkie/ssh-key-and-known-hosts-action@v1.2.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: deploy project to server using envoy
+      run: php vendor/bin/envoy run deploy
+      
+    
+  
